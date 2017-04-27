@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>TODO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center class="vertical-align-content" [hidden]="todos && todos.length > 0">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="readjust">
+        No item has been added. Use the "+" button below to add a new item.
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content padding [hidden]="!todos || todos.length <= 0">
+  <ion-item *ngFor="let todo of todos">
+    <ion-label [ngClass]="{stricken:todo.done}">{{ todo.name }}</ion-label>
+    <ion-checkbox color="dark" [(ngModel)]="todo.done" (click)="updateItemState($event, todo)"></ion-checkbox>
+  </ion-item>
+</ion-content>
+
+<ion-fab right bottom>
+  <button ion-fab color="primary" (click)="showInputAlert()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>
